@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gpa_calculator.CourseEntryController">
+    <top>
+        <VBox style="-fx-background-color: #34495e; -fx-padding: 20;">
+            <Label text="GPA Calculator - Course Entry" textFill="white">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                <VBox.margin>
+                    <Insets top="5.0" />
+                </VBox.margin>
+                <Label fx:id="creditInfoLabel" text="Total Credits: 0.0 / 15.0" textFill="#ecf0f1">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button mnemonicParsing="false" onAction="#handleSetTotalCredits" style="-fx-background-color: #16a085; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand; -fx-padding: 5 10;" text="Set Total Credits">
+                    <font>
+                        <Font name="System Bold" size="11.0" />
+                    </font>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #ecf0f1;">
+            <VBox spacing="20.0" style="-fx-background-color: #ecf0f1;">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+                
+                <!-- Course Input Section -->
+                <VBox spacing="15.0" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10;">
+                    <Label text="Enter Course Details" textFill="#2c3e50">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                    
+                    <Separator />
+                    
+                    <GridPane hgap="15.0" vgap="12.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" />
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" />
+                        </columnConstraints>
+                        
+                        <Label text="Course Name:" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="courseNameField" promptText="e.g., Data Structures" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        
+                        <Label text="Course Code:" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="courseCodeField" promptText="e.g., CSE 2101" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        
+                        <Label text="Course Credit:" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="courseCreditField" promptText="e.g., 3.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        
+                        <Label text="Teacher 1 Name:" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="teacher1Field" promptText="e.g., Dr. John Smith" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        
+                        <Label text="Teacher 2 Name:" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="teacher2Field" promptText="e.g., Prof. Jane Doe (Optional)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        
+                        <Label text="Grade:" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="gradeComboBox" prefWidth="200.0" promptText="Select Grade" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    </GridPane>
+                    
+                    <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                        <VBox.margin>
+                            <Insets top="10.0" />
+                        </VBox.margin>
+                        <Button mnemonicParsing="false" onAction="#handleClearFields" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Clear">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleAddCourse" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Add Course">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </HBox>
+                </VBox>
+                
+                <!-- Added Courses Section -->
+                <VBox fx:id="coursesListContainer" spacing="10.0" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10;">
+                    <Label text="Added Courses" textFill="#2c3e50">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                    <Separator />
+                    <Label fx:id="noCoursesLabel" text="No courses added yet. Please add courses above." textFill="#7f8c8d">
+                        <font>
+                            <Font size="13.0" />
+                        </font>
+                    </Label>
+                    <VBox fx:id="coursesList" spacing="8.0">
+                        <VBox.margin>
+                            <Insets top="10.0" />
+                        </VBox.margin>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+    <bottom>
+        <HBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #ecf0f1; -fx-padding: 20;">
+            <Button mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Back to Home">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Button>
+            <Button fx:id="calculateGPAButton" disable="true" mnemonicParsing="false" onAction="#handleCalculateGPA" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Calculate GPA">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Button>
+        </HBox>
+    </bottom>
+</BorderPane>

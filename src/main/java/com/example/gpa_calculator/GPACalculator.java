@@ -1,0 +1,68 @@
+package com.example.gpa_calculator;
+
+import java.util.List;
+
+public class GPACalculator {
+    
+    /**
+     * Converts letter grade to grade points
+     */
+    public static double getGradePoint(String grade) {
+        switch (grade.toUpperCase()) {
+            case "A+":
+            case "A":
+                return 4.0;
+            case "A-":
+                return 3.7;
+            case "B+":
+                return 3.3;
+            case "B":
+                return 3.0;
+            case "B-":
+                return 2.7;
+            case "C+":
+                return 2.3;
+            case "C":
+                return 2.0;
+            case "C-":
+                return 1.7;
+            case "D+":
+                return 1.3;
+            case "D":
+                return 1.0;
+            case "F":
+                return 0.0;
+            default:
+                return 0.0;
+        }
+    }
+    
+    /**
+     * Calculates weighted GPA based on courses
+     */
+    public static double calculateGPA(List<Course> courses) {
+        double totalWeightedPoints = 0.0;
+        double totalCredits = 0.0;
+        
+        for (Course course : courses) {
+            double gradePoint = getGradePoint(course.getGrade());
+            double credit = course.getCourseCredit();
+            
+            totalWeightedPoints += gradePoint * credit;
+            totalCredits += credit;
+        }
+        
+        if (totalCredits == 0) {
+            return 0.0;
+        }
+        
+        return totalWeightedPoints / totalCredits;
+    }
+    
+    /**
+     * Returns all available grade options
+     */
+    public static String[] getGradeOptions() {
+        return new String[]{"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"};
+    }
+}
